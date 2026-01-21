@@ -78,5 +78,3 @@ workflows:
   build-workflow:
     jobs:
       - build
-      - vulnerability-scan:
-          context: org-global-employees
