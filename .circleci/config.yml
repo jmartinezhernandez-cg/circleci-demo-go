@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  snyk: snyk/snyk@2.2.0
-
 executors:
   go:
     docker:
@@ -76,23 +73,6 @@ jobs: # basic units of work in a run
       - store_test_results: # upload test results for display in Test Summary
           path: /tmp/test-results
 
-  vulnerability-scan:
-    executor: go
-    steps:
-      - checkout
-      - run:
-          name: Setup Scanning
-          command: |
-              git config --global url."https://$GITHUB_USER:$GITHUB_TOKEN@github.com/circleci/".insteadOf "https://github.com/circleci/"
-      - run:
-          name: Launching Snyk Orb Scanning
-          command: echo "Running snyk/scan and displaying the results"
-      - snyk/scan:
-          organization: "circleci-public"
-          fail-on-issues: true
-          severity-threshold: high
-          monitor-on-build: false
-          additional-arguments: "--all-projects"
 
 workflows:
   build-workflow:
