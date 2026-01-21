@@ -10,3 +10,8 @@ func TestValidate(t *testing.T) {
 	result := Validate("my string")
 	assert.True(t, result)
 }
+
+func TestFailure(t *testing.T) {
+	result := Validate("my string")
+	assert.False(t, result)
+}
